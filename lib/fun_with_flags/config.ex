@@ -64,22 +64,25 @@ defmodule FunWithFlags.Config do
   # Used to determine the store module at compile time, which is stored in a
   # module attribute. `Application.compile_env` cannot be used in functions,
   # so here we are.
-  @compile_time_cache_config Application.compile_env(:fun_with_flags, :cache, [])
+  # @compile_time_cache_config Application.compile_env(:fun_with_flags, :cache, [])
 
   # If we're not using the cache, then don't bother with
   # the 2-level logic in the default Store module.
   #
   def store_module_determined_at_compile_time do
-    cache_conf = Keyword.merge(
-      @default_cache_config,
-      @compile_time_cache_config
-    )
+    # cache_conf = Keyword.merge(
+    #   @default_cache_config,
+    #   @compile_time_cache_config
+    # )
+    #
+    # if Keyword.get(cache_conf, :enabled) do
+    #   FunWithFlags.Store
+    # else
+    #   FunWithFlags.SimpleStore
+    # end
 
-    if Keyword.get(cache_conf, :enabled) do
-      FunWithFlags.Store
-    else
-      FunWithFlags.SimpleStore
-    end
+    # Hard code the store
+    FunWithFlags.SimpleStore
   end
 
 
